@@ -1,4 +1,5 @@
 import 'package:chathub/config/routes/routes.dart';
+import 'package:chathub/core/colors/colors.dart';
 import 'package:chathub/features/auth/presentation/widgets/elevated_button/elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,7 +25,7 @@ class ScreenOnboard extends StatelessWidget {
                     TextSpan(
                         text: "ChatHub Terms of service",
                         style: TextStyle(
-                            color: Color.fromARGB(255, 7, 126, 223),
+                            color: CustomColor.blueColor,
                             fontWeight: FontWeight.w500))
                   ]))),
         ),
@@ -34,7 +35,7 @@ class ScreenOnboard extends StatelessWidget {
           },
           child: Text(
             "Agree and continue",
-            style: TextStyle(fontSize: 17.dm),
+            style: TextStyle(fontSize: 17.dm, color: CustomColor.whiteColor),
           ),
         ),
         SizedBox(height: 20.h),

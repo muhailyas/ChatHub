@@ -1,4 +1,3 @@
-
 import 'package:chathub/core/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,7 +12,7 @@ class ElevatedButtonWidget extends StatelessWidget {
     this.width,
     required this.child,
   });
-  final Function onPressed;
+  final VoidCallback onPressed;
   final Color backgroundColor;
   final double borderRadius;
   final double? width;
@@ -23,7 +22,7 @@ class ElevatedButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: onPressed(),
+      onPressed: onPressed,
       style: ButtonStyle(
           backgroundColor: MaterialStatePropertyAll(backgroundColor),
           shape: MaterialStatePropertyAll(RoundedRectangleBorder(

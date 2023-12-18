@@ -27,6 +27,7 @@ dependencies:
   #Dart service locator for Flutter.
   get_it: ^7.6.4
   flutter_screenutil: ^5.9.0
+  pinput: ^3.0.1
 
 dev_dependencies:
   flutter_test:

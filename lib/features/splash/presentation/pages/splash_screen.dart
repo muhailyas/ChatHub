@@ -45,8 +45,8 @@ class ScreenSplashState extends State<ScreenSplash>
 
   @override
   Widget build(BuildContext context) {
-    Timer(const Duration(seconds: 4), () {
-     Navigator.pushReplacementNamed(context,Routes.onboard);
+    Timer(const Duration(seconds: 3), () {
+      Navigator.pushReplacementNamed(context, Routes.onboard);
     });
     return Scaffold(
       body: Center(
