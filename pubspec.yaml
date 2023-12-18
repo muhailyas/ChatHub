@@ -1,0 +1,48 @@
+name: chathub
+description: A chat application 
+
+
+publish_to: 'none' 
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.1.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+
+  #BLoC-based state management for Flutter.
+  flutter_bloc: ^8.1.3
+
+  #Core BLoC package for Flutter state management.
+  bloc: ^8.1.2
+
+  #Code generation for immutable classes in Dart.
+  freezed_annotation: ^2.4.1
+
+  #Dart service locator for Flutter.
+  get_it: ^7.6.4
+  flutter_screenutil: ^5.9.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+  #Dart code build system for generating code.
+  build_runner: ^2.4.7
+  
+  #Dart package for creating immutable classes.
+  freezed: ^2.4.6
+
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/
