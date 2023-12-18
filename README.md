@@ -6,8 +6,9 @@ This Flutter application is a real-time chat application that utilizes Firebase 
 ## Key Features
 ### Authentication
 - Users can log in using their mobile numbers.
-- User privacy is prioritized, and other users cannot view information without permission.
-- Usernames are only accessible with user permission.
+- User privacy is prioritized, and other users cannot view sensitive information without permission.
+- Usernames are searchable, but detailed user information, including phone numbers, is only accessible with user permission.
+
 
 ### Chat
 - Real-time chat functionality.
