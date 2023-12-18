@@ -1,4 +1,5 @@
 import 'package:chathub/config/routes/routes.dart';
+import 'package:chathub/features/auth/presentation/pages/mobile_field/mobile_Field.dart';
 import 'package:chathub/features/auth/presentation/pages/onboard/onboard.dart';
 import 'package:chathub/features/splash/presentation/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,9 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) => const ScreenSplash(),
         );
+      case Routes.mobileField:
+        return MaterialPageRoute(
+            builder: (context) => const MobileFieldScreen());
       default:
         return _errorScreen();
     }

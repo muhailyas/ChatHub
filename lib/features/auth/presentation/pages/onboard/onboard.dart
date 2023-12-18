@@ -1,4 +1,5 @@
-import 'package:chathub/core/colors/colors.dart';
+import 'package:chathub/config/routes/routes.dart';
+import 'package:chathub/features/auth/presentation/widgets/elevated_button/elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -27,17 +28,13 @@ class ScreenOnboard extends StatelessWidget {
                             fontWeight: FontWeight.w500))
                   ]))),
         ),
-        ElevatedButton(
-          onPressed: () {},
-          style: ButtonStyle(
-              backgroundColor:
-                  const MaterialStatePropertyAll(CustomColor.secondaryColor),
-              shape: MaterialStatePropertyAll(RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25))),
-              fixedSize: MaterialStatePropertyAll(Size(320.w, 40.h))),
+        ElevatedButtonWidget(
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, Routes.mobileField);
+          },
           child: Text(
             "Agree and continue",
-            style: TextStyle(fontSize: 20.sp),
+            style: TextStyle(fontSize: 17.dm),
           ),
         ),
         SizedBox(height: 20.h),
