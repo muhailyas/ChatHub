@@ -1,13 +1,19 @@
+import 'package:chathub/config/routes/routes.dart';
 import 'package:chathub/core/colors/colors.dart';
+import 'package:chathub/features/auth/presentation/bloc/bloc/auth_bloc.dart';
 import 'package:chathub/features/auth/presentation/widgets/elevated_button/elevated_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+final TextEditingController controller = TextEditingController();
 
 class MobileFieldScreen extends StatelessWidget {
   const MobileFieldScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final ValueNotifier<String> errorTextNotifier = ValueNotifier<String>("");
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -62,7 +68,7 @@ class MobileFieldScreen extends StatelessWidget {
                       child: Padding(
                         padding: EdgeInsets.symmetric(horizontal: 18.0.h),
                         child: TextFormField(
-                          controller: TextEditingController(),
+                          controller: controller,
                           keyboardType: TextInputType.phone,
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -72,6 +78,16 @@ class MobileFieldScreen extends StatelessWidget {
                               color: CustomColor.whiteColor,
                             ),
                           ),
+                          onChanged: (value) {
+                            if (value.isEmpty) {
+                              errorTextNotifier.value = '';
+                            } else if (value.length != 10) {
+                              errorTextNotifier.value =
+                                  'please enter valid mobile';
+                            } else {
+                              errorTextNotifier.value = '';
+                            }
+                          },
                           cursorColor: CustomColor.secondarySaffron,
                           style: TextStyle(
                             fontSize: 12.dg,
@@ -84,16 +100,45 @@ class MobileFieldScreen extends StatelessWidget {
                 ],
               ),
             ),
-            ElevatedButtonWidget(
-                onPressed: () {},
-                child: Text(
-                  "Continue",
-                  style: TextStyle(
-                    fontSize: 15.dm,
-                    fontWeight: FontWeight.w400,
-                    color: CustomColor.whiteColor,
-                  ),
-                ))
+            Row(
+              children: [
+                Padding(
+                    padding: EdgeInsets.only(left: 80.dg, bottom: 15.dg),
+                    child: ValueListenableBuilder(
+                        valueListenable: errorTextNotifier,
+                        builder: (context, value, _) {
+                          if (value.isEmpty) {
+                            return const SizedBox();
+                          }
+                          return Text(
+                            value,
+                            style: const TextStyle(color: Colors.red),
+                          );
+                        })),
+              ],
+            ),
+            BlocListener<AuthBloc, AuthState>(
+              listener: (context, state) {
+                if (state is AuthSuccess) {
+                  // Navigator.pushNamed(context, Routes.otp);
+                }
+              },
+              child: ElevatedButtonWidget(
+                  onPressed: () {
+                    if (controller.text.isNotEmpty) {
+                      context.read<AuthBloc>().add(AuthEvent.sendMobileForOtp(
+                          mobile: controller.text.trim()));
+                    }
+                  },
+                  child: Text(
+                    "Continue",
+                    style: TextStyle(
+                      fontSize: 15.dm,
+                      fontWeight: FontWeight.w400,
+                      color: CustomColor.whiteColor,
+                    ),
+                  )),
+            )
           ],
         ),
       ),

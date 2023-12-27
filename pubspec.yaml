@@ -27,6 +27,8 @@ dependencies:
   #Dart service locator for Flutter.
   get_it: ^7.6.4
   flutter_screenutil: ^5.9.0
+  firebase_core: ^2.24.2
+  firebase_auth: ^4.15.3
 
 dev_dependencies:
   flutter_test:

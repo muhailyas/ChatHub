@@ -1,10 +1,20 @@
 import 'package:chathub/config/routes/route_generator.dart';
 import 'package:chathub/config/theme/theme.dart';
+import 'package:chathub/features/auth/data/repository/auth_repository_impl.dart';
+import 'package:chathub/features/auth/domain/usecases/authentication_usecase/authentication_usecase.dart';
+import 'package:chathub/features/auth/presentation/bloc/bloc/auth_bloc.dart';
 import 'package:chathub/features/splash/presentation/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const ChatHub());
 }
 
@@ -14,14 +24,21 @@ class ChatHub extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: const Size(360, 690),
-      child: MaterialApp(
-        title: 'ChatHub',
-        debugShowCheckedModeBanner: false,
-        onGenerateRoute: (settings) =>
-            RouteGenerator().onGenerateRoute(settings),
-        theme: theme(),
-        home: const ScreenSplash(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) =>
+                AuthBloc(AuthenticationUseCase(AuthenticationRepositoryImpl())),
+          ),
+        ],
+        child: MaterialApp(
+          title: 'ChatHub',
+          debugShowCheckedModeBanner: false,
+          onGenerateRoute: (settings) =>
+              RouteGenerator().onGenerateRoute(settings),
+          theme: theme(),
+          home: const ScreenSplash(),
+        ),
       ),
     );
   }

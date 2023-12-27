@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:chathub/config/routes/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +16,6 @@ class ScreenSplashState extends State<ScreenSplash>
   @override
   void initState() {
     super.initState();
-
     // Initialize animation controller
     _controller = AnimationController(
       duration: const Duration(seconds: 3),
@@ -32,6 +30,14 @@ class ScreenSplashState extends State<ScreenSplash>
       ),
     );
 
+    _controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
+        // Animation is complete, initiate the navigation
+        Navigator.pushNamedAndRemoveUntil(
+            context, Routes.onboard, (route) => false);
+      }
+    });
+
     // Start the animation
     _controller.forward();
   }
@@ -45,9 +51,6 @@ class ScreenSplashState extends State<ScreenSplash>
 
   @override
   Widget build(BuildContext context) {
-    Timer(const Duration(seconds: 4), () {
-     Navigator.pushReplacementNamed(context,Routes.onboard);
-    });
     return Scaffold(
       body: Center(
         child: FadeTransition(
