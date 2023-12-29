@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 
+var verificationUID = '';
+
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -27,6 +29,7 @@ class AuthService {
         },
         codeSent: (String verificationId, int? forceResendingToken) {
           print('Code Sent! Verification ID: $verificationId');
+          verificationUID = verificationId;
           // You might return something useful here if needed
         },
         codeAutoRetrievalTimeout: (String verificationId) {
@@ -43,5 +46,14 @@ class AuthService {
     }
 
     return completer.future;
+  }
+
+  Future<UserCredential> validateOtp(String otp, String verificationId) async {
+    PhoneAuthCredential credential = PhoneAuthProvider.credential(
+      verificationId: verificationId,
+      smsCode: otp,
+    );
+
+    return await _auth.signInWithCredential(credential);
   }
 }

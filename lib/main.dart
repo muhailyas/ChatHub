@@ -1,8 +1,10 @@
 import 'package:chathub/config/routes/route_generator.dart';
 import 'package:chathub/config/theme/theme.dart';
 import 'package:chathub/features/auth/data/repository/auth_repository_impl.dart';
-import 'package:chathub/features/auth/domain/usecases/authentication_usecase/authentication_usecase.dart';
-import 'package:chathub/features/auth/presentation/bloc/bloc/auth_bloc.dart';
+import 'package:chathub/features/auth/domain/usecases/send_otp_usecase/send_otp_usecase.dart';
+import 'package:chathub/features/auth/domain/usecases/validate_mobile_usecase/validate_mobile_usecase.dart';
+import 'package:chathub/features/auth/domain/usecases/verify_otp_usecase/verify_otp_usecase.dart';
+import 'package:chathub/features/auth/presentation/bloc/auth/auth_bloc.dart';
 import 'package:chathub/features/splash/presentation/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,6 +17,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   runApp(const ChatHub());
 }
 
@@ -27,8 +30,10 @@ class ChatHub extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) =>
-                AuthBloc(AuthenticationUseCase(AuthenticationRepositoryImpl())),
+            create: (context) => AuthBloc(
+                SendOtpUseCase(AuthenticationRepositoryImpl()),
+                VerifyOtpUseCase(AuthenticationRepositoryImpl()),
+                ValidateMobileUseCase()),
           ),
         ],
         child: MaterialApp(
