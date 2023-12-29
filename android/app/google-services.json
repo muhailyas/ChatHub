@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "271459223628",
+    "project_id": "chathub-4523c",
+    "storage_bucket": "chathub-4523c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:271459223628:android:76d76a27d9c2aca596cce9",
+        "android_client_info": {
+          "package_name": "com.mrvl.chathub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBZffzuEetbmSIDCTtu6CbrF8fPDHqJNg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

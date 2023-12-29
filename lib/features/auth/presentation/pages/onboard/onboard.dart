@@ -1,6 +1,8 @@
 import 'package:chathub/config/routes/routes.dart';
 import 'package:chathub/core/colors/colors.dart';
+import 'package:chathub/core/constants/strings.dart';
 import 'package:chathub/features/auth/presentation/widgets/elevated_button/elevated_button.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -20,21 +22,25 @@ class ScreenOnboard extends StatelessWidget {
           child: SizedBox(
               child: RichText(
                   textAlign: TextAlign.center,
-                  text: const TextSpan(children: [
-                    TextSpan(text: "Tap 'Agree and continue' to accept the "),
+                  text: TextSpan(children: [
+                    const TextSpan(text: AppStrings.onboardText),
                     TextSpan(
-                        text: "ChatHub Terms of service",
-                        style: TextStyle(
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.pushNamed(context, Routes.termsOfUse);
+                          },
+                        text: AppStrings.onboardTermsText,
+                        style: const TextStyle(
                             color: CustomColor.blueColor,
                             fontWeight: FontWeight.w500))
                   ]))),
         ),
         ElevatedButtonWidget(
           onPressed: () {
-            Navigator.pushReplacementNamed(context, Routes.mobileField);
+            Navigator.pushNamed(context, Routes.mobileField);
           },
           child: Text(
-            "Agree and continue",
+            AppStrings.onboardContinue,
             style: TextStyle(fontSize: 17.dm, color: CustomColor.whiteColor),
           ),
         ),
