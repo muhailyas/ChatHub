@@ -27,7 +27,7 @@ class ScreenOnboard extends StatelessWidget {
                     TextSpan(
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
-                            print("object");
+                            Navigator.pushNamed(context, Routes.termsOfUse);
                           },
                         text: AppStrings.onboardTermsText,
                         style: const TextStyle(
@@ -37,7 +37,7 @@ class ScreenOnboard extends StatelessWidget {
         ),
         ElevatedButtonWidget(
           onPressed: () {
-            Navigator.pushReplacementNamed(context, Routes.mobileField);
+            Navigator.pushNamed(context, Routes.mobileField);
           },
           child: Text(
             AppStrings.onboardContinue,

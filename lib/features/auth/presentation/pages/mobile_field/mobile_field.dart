@@ -1,17 +1,19 @@
 import 'package:chathub/config/routes/routes.dart';
 import 'package:chathub/core/colors/colors.dart';
 import 'package:chathub/core/constants/constants.dart';
+import 'package:chathub/core/constants/strings.dart';
 import 'package:chathub/features/auth/presentation/bloc/auth/auth_bloc.dart';
+import 'package:chathub/features/auth/presentation/widgets/circular_progress_bar/circular_progress.dart';
 import 'package:chathub/features/auth/presentation/widgets/elevated_button/elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MobileFieldScreen extends StatelessWidget {
-  MobileFieldScreen({super.key});
-  final TextEditingController controller = TextEditingController();
+  const MobileFieldScreen({super.key});
   @override
   Widget build(BuildContext context) {
+    final authBloc = BlocProvider.of<AuthBloc>(context);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -21,7 +23,7 @@ class MobileFieldScreen extends StatelessWidget {
             children: [
               SizedBox(width: double.infinity, height: 20.h),
               Text(
-                "Verify your phone number",
+                AppStrings.verifyMobile,
                 style: TextStyle(
                   fontSize: 22.dg,
                   fontWeight: FontWeight.w400,
@@ -30,7 +32,7 @@ class MobileFieldScreen extends StatelessWidget {
               ),
               SizedBox(height: 5.dg),
               Text(
-                "ChatHub will need to verify your account",
+                AppStrings.verifyYourAccount,
                 style: TextStyle(
                   fontSize: 10.dg,
                   fontWeight: FontWeight.w300,
@@ -49,7 +51,7 @@ class MobileFieldScreen extends StatelessWidget {
                         borderRadius: Constants.borderRadius25H),
                     child: Center(
                         child: Text(
-                      "+91",
+                      AppStrings.countryCode,
                       style: TextStyle(
                           fontSize: 12.dg,
                           color: CustomColor.whiteColor,
@@ -68,14 +70,14 @@ class MobileFieldScreen extends StatelessWidget {
                       child: Padding(
                         padding: EdgeInsets.symmetric(
                           horizontal: 16.0.h,
-                          vertical: 6,
+                          vertical: 6.w,
                         ),
                         child: TextField(
-                          controller: controller,
+                          controller: authBloc.mobileController,
                           keyboardType: TextInputType.phone,
                           decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: "mobile",
+                            hintText: AppStrings.hintTextMobile,
                             hintStyle: TextStyle(
                               fontSize: 12.dg,
                               color: CustomColor.whiteColor,
@@ -96,9 +98,8 @@ class MobileFieldScreen extends StatelessWidget {
               BlocConsumer<AuthBloc, AuthState>(
                 listener: (context, state) {
                   if (state is MobileVerified) {
-                    context
-                        .read<AuthBloc>()
-                        .add(AuthEvent.sendOtp(mobile: controller.text.trim()));
+                    context.read<AuthBloc>().add(AuthEvent.sendOtp(
+                        mobile: authBloc.mobileController.text.trim()));
                   }
                   if (state is MobileVerificationError) {
                     ScaffoldMessenger.of(context).hideCurrentSnackBar();
@@ -115,19 +116,20 @@ class MobileFieldScreen extends StatelessWidget {
                         )));
                   }
                   if (state is NavigateToOtp) {
-                    Navigator.pushReplacementNamed(context, Routes.otp);
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, Routes.otp, (route) => false);
                   }
                 },
                 builder: (context, state) {
                   return ElevatedButtonWidget(
                       onPressed: () {
                         context.read<AuthBloc>().add(AuthEvent.validateMobile(
-                            mobile: controller.text.trim()));
+                            mobile: authBloc.mobileController.text.trim()));
                       },
                       child: state is MobileVerificationLoading
-                          ? const CircularProgressIndicator()
+                          ? const CircularProgressIndicatorWidget()
                           : Text(
-                              "Continue",
+                              AppStrings.continueText,
                               style: TextStyle(
                                 fontSize: 15.dm,
                                 fontWeight: FontWeight.w400,

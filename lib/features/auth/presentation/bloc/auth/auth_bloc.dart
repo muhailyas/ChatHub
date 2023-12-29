@@ -8,6 +8,7 @@ import 'package:chathub/features/auth/domain/usecases/authentication_params.dart
 import 'package:chathub/features/auth/domain/usecases/send_otp_usecase/send_otp_usecase.dart';
 import 'package:chathub/features/auth/domain/usecases/validate_mobile_usecase/validate_mobile_usecase.dart';
 import 'package:chathub/features/auth/domain/usecases/verify_otp_usecase/verify_otp_usecase.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -17,6 +18,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final SendOtpUseCase _authenticationUseCase;
   final VerifyOtpUseCase _otpUseCase;
   final ValidateMobileUseCase _validateMobile;
+
+  final TextEditingController mobileController = TextEditingController();
+  final TextEditingController otpController = TextEditingController();
   AuthBloc(this._authenticationUseCase, this._otpUseCase, this._validateMobile)
       : super(const _Initial()) {
     on<_SendMobileForOtp>(sendMobileForOtp);
@@ -36,8 +40,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   FutureOr<void> verifyOtp(event, Emitter<AuthState> emit) async {
     emit(const AuthState.otpVerifyLoading());
     final dataState = await _otpUseCase(
-        params:
-            VerificationParams(otp: event.otp, validationId: verificationUID));
+        params: VerificationParams(
+            otp: event.otp, validationId: AuthService.verificationUID));
     if (dataState is DataSuccess) {
       emit(const AuthState.otpVerified());
     } else {

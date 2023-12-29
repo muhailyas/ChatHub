@@ -26,8 +26,7 @@ class AuthenticationRepositoryImpl implements AuthRepositoy {
   @override
   Future<DataState<AuthEntity>> verifyOtp({required String otp}) async {
     try {
-      
-      await _authService.validateOtp(otp, verificationUID);
+      await _authService.validateOtp(otp, AuthService.verificationUID);
       return DataSuccess(AuthEntity(mobile: '', userId: ''));
     } on FirebaseAuthException catch (e) {
       return DataFailed(e);
