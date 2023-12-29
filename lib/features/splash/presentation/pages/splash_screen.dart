@@ -1,5 +1,7 @@
 import 'package:chathub/config/routes/routes.dart';
+import 'package:chathub/features/splash/presentation/bloc/splash/splash_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ScreenSplash extends StatefulWidget {
   const ScreenSplash({Key? key}) : super(key: key);
@@ -32,9 +34,8 @@ class ScreenSplashState extends State<ScreenSplash>
 
     _controller.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
-        // Animation is complete, initiate the navigation
-        Navigator.pushNamedAndRemoveUntil(
-            context, Routes.onboard, (route) => false);
+        // Animation is completed
+        context.read<SplashBloc>().add(const SplashEvent.started());
       }
     });
 
@@ -51,12 +52,21 @@ class ScreenSplashState extends State<ScreenSplash>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: FadeTransition(
-          opacity: _opacityAnimation,
-          child: Image.asset(
-            "assets/Chat hub logo.png",
+    return BlocListener<SplashBloc, SplashState>(
+      listener: (context, state) {
+        if (state is NavigateToHome) {
+          Navigator.pushReplacementNamed(context, Routes.home);
+        } else {
+          Navigator.pushReplacementNamed(context, Routes.onboard);
+        }
+      },
+      child: Scaffold(
+        body: Center(
+          child: FadeTransition(
+            opacity: _opacityAnimation,
+            child: Image.asset(
+              "assets/Chat hub logo.png",
+            ),
           ),
         ),
       ),

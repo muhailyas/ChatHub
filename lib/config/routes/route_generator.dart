@@ -20,7 +20,7 @@ class RouteGenerator {
         );
       case Routes.mobileField:
         return MaterialPageRoute(
-          builder: (context) => MobileFieldScreen(),
+          builder: (context) => const MobileFieldScreen(),
         );
       case Routes.otp:
         return MaterialPageRoute(

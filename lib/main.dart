@@ -5,6 +5,10 @@ import 'package:chathub/features/auth/domain/usecases/send_otp_usecase/send_otp_
 import 'package:chathub/features/auth/domain/usecases/validate_mobile_usecase/validate_mobile_usecase.dart';
 import 'package:chathub/features/auth/domain/usecases/verify_otp_usecase/verify_otp_usecase.dart';
 import 'package:chathub/features/auth/presentation/bloc/auth/auth_bloc.dart';
+import 'package:chathub/features/splash/data/data_sources/remote/firebase_service.dart';
+import 'package:chathub/features/splash/data/repository/splash_repository_impl.dart';
+import 'package:chathub/features/splash/domain/usecases/user_authenticity_check_usecase.dart';
+import 'package:chathub/features/splash/presentation/bloc/splash/splash_bloc.dart';
 import 'package:chathub/features/splash/presentation/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -35,6 +39,10 @@ class ChatHub extends StatelessWidget {
                 VerifyOtpUseCase(AuthenticationRepositoryImpl()),
                 ValidateMobileUseCase()),
           ),
+          BlocProvider(
+            create: (context) => SplashBloc(UserAuthenticityCheckUseCase(
+                SplashRepositoryImpl(FirebaseService()))),
+          )
         ],
         child: MaterialApp(
           title: 'ChatHub',
