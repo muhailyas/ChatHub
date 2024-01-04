@@ -106,7 +106,7 @@ class ScreenHome extends StatelessWidget {
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              Text("Mary john",
+                                              Text("Athila CA",
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   style: TextStyle(

@@ -6,7 +6,8 @@ import 'package:chathub/features/auth/domain/repository/auth_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthenticationRepositoryImpl implements AuthRepositoy {
-  final AuthService _authService = AuthService();
+  final AuthService _authService;
+  AuthenticationRepositoryImpl(this._authService);
   @override
   Future<DataState<AuthEntity>> authenticate({required String mobile}) async {
     try {
