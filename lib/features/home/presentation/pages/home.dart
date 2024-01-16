@@ -82,74 +82,82 @@ class ScreenHome extends StatelessWidget {
                       (index) {
                         return index % 2 == 0
                             ? ListView.separated(
+                                physics: const BouncingScrollPhysics(),
                                 separatorBuilder: (context, index) =>
                                     const SizedBox(height: 5),
                                 itemCount: 10,
                                 itemBuilder: (context, index) {
-                                  return SizedBox(
-                                    height: 85.h,
-                                    width: double.infinity,
-                                    child: Row(
-                                      children: [
-                                        CircleAvatar(
-                                          radius: 30.sp,
-                                          backgroundImage: const NetworkImage(
-                                              'https://imgs.search.brave.com/9HZUq2wCtup2lbzmW230Bep7WzPEvBsBXTk9Q2cbYLc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTI4/MTk5ODUxOS9waG90/by9wcm9maWxlLXBv/cnRyYWl0LW9mLXdv/bWFuLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz1NdF9meTNH/SzFka2hyR3BfUGtu/VmpFR2VNTWpfcVNB/QWJIWWtYLWYtMy1r/PQ'),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal: 15.h,
+                                  return InkWell(
+                                    onTap: () => Navigator.pushNamed(
+                                        context, Routes.chatPage),
+                                    child: SizedBox(
+                                      height: 85.h,
+                                      width: double.infinity,
+                                      child: Row(
+                                        children: [
+                                          CircleAvatar(
+                                            radius: 30.sp,
+                                            backgroundImage: const NetworkImage(
+                                                'https://imgs.search.brave.com/9HZUq2wCtup2lbzmW230Bep7WzPEvBsBXTk9Q2cbYLc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTI4/MTk5ODUxOS9waG90/by9wcm9maWxlLXBv/cnRyYWl0LW9mLXdv/bWFuLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz1NdF9meTNH/SzFka2hyR3BfUGtu/VmpFR2VNTWpfcVNB/QWJIWWtYLWYtMy1r/PQ'),
                                           ),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 15.h,
+                                            ),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text("Marry john",
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                        fontSize: 18.sp,
+                                                        color: CustomColor
+                                                            .whiteColor)),
+                                                SizedBox(height: 10.h),
+                                                const Text(
+                                                  "I'm at the office right now",
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w300,
+                                                      color: CustomColor
+                                                          .whiteColor),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          const Spacer(),
+                                          Column(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              Text("Athila CA",
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
+                                              CircleAvatar(
+                                                backgroundColor: CustomColor
+                                                    .secondarySaffron,
+                                                radius: 11.h,
+                                                child: const Text(
+                                                  "2",
                                                   style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      fontSize: 18.sp,
-                                                      color: CustomColor
-                                                          .whiteColor)),
-                                              SizedBox(height: 10.h),
-                                              const Text(
-                                                "I'm at the office right now",
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.w300,
                                                     color:
-                                                        CustomColor.whiteColor),
-                                              ),
+                                                        CustomColor.whiteColor,
+                                                  ),
+                                                ),
+                                              )
                                             ],
                                           ),
-                                        ),
-                                        const Spacer(),
-                                        Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            CircleAvatar(
-                                              backgroundColor:
-                                                  CustomColor.secondarySaffron,
-                                              radius: 11.h,
-                                              child: const Text(
-                                                "2",
-                                                style: TextStyle(
-                                                  color: CustomColor.whiteColor,
-                                                ),
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   );
                                 },
                               )
                             : ListView.separated(
+                                physics: const BouncingScrollPhysics(),
                                 separatorBuilder: (context, index) =>
                                     const SizedBox(height: 5),
                                 itemCount: 10,
