@@ -5,8 +5,9 @@ import 'package:pinput/pinput.dart';
 
 ThemeData theme() {
   return ThemeData(
-    scaffoldBackgroundColor: CustomColor.scaffoldBackgroundColor,
-  );
+      scaffoldBackgroundColor: CustomColor.scaffoldBackgroundColor,
+      appBarTheme: const AppBarTheme(
+          backgroundColor: CustomColor.scaffoldBackgroundColor));
 }
 
 final defaultPinTheme = PinTheme(

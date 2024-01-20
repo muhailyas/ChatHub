@@ -3,6 +3,7 @@ import 'package:chathub/features/auth/presentation/pages/mobile_field/mobile_Fie
 import 'package:chathub/features/auth/presentation/pages/onboard/onboard.dart';
 import 'package:chathub/features/auth/presentation/pages/otp/otp.dart';
 import 'package:chathub/features/auth/presentation/pages/terms_of_service/terms_of_service.dart';
+import 'package:chathub/features/chat/presentation/pages/chat_page.dart';
 import 'package:chathub/features/home/presentation/pages/home.dart';
 import 'package:chathub/features/splash/presentation/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,10 @@ class RouteGenerator {
       case Routes.termsOfUse:
         return MaterialPageRoute(
           builder: (context) => const ScreenTermsOfService(),
+        );
+      case Routes.chatPage:
+        return MaterialPageRoute(
+          builder: (context) => const ScreenChat(),
         );
       default:
         return _errorScreen();
