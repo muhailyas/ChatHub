@@ -5,6 +5,7 @@ import 'package:chathub/features/auth/presentation/pages/otp/otp.dart';
 import 'package:chathub/features/auth/presentation/pages/terms_of_service/terms_of_service.dart';
 import 'package:chathub/features/chat/presentation/pages/chat_page.dart';
 import 'package:chathub/features/home/presentation/pages/home.dart';
+import 'package:chathub/features/profile/presentation/pages/visit_profile/visit_user_proflie.dart';
 import 'package:chathub/features/splash/presentation/pages/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -38,6 +39,10 @@ class RouteGenerator {
       case Routes.chatPage:
         return MaterialPageRoute(
           builder: (context) => const ScreenChat(),
+        );
+      case Routes.visitProfile:
+        return MaterialPageRoute(
+          builder: (context) => const ScreenVisitProfile(),
         );
       default:
         return _errorScreen();

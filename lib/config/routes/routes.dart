@@ -6,4 +6,5 @@ class Routes {
   static const home = 'home/';
   static const termsOfUse = 'terms_of_use/';
   static const chatPage = 'chatPage/';
+  static const visitProfile = 'visitProfile/';
 }
