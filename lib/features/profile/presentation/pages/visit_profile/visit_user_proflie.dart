@@ -10,10 +10,13 @@ class ScreenVisitProfile extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: [
-          const SliverAppBar(
-            leading:
-                Icon(Icons.arrow_back, color: CustomColor.secondarySaffron),
-            actions: [
+          SliverAppBar(
+            pinned: true,
+            leading: GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: const Icon(Icons.arrow_back,
+                    color: CustomColor.secondarySaffron)),
+            actions: const [
               Icon(Icons.more_vert_rounded, color: CustomColor.secondarySaffron)
             ],
           ),

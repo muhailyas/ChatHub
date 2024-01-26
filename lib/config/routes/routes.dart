@@ -7,4 +7,5 @@ class Routes {
   static const termsOfUse = 'terms_of_use/';
   static const chatPage = 'chatPage/';
   static const visitProfile = 'visitProfile/';
+  static const profile = 'profile/';
 }

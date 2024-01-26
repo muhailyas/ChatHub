@@ -35,6 +35,9 @@ class ScreenHome extends StatelessWidget {
                     ),
                     SizedBox(width: 10.sp),
                     InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, Routes.profile);
+                      },
                       onDoubleTap: () {
                         FirebaseAuth.instance.signOut();
                         Navigator.pushNamedAndRemoveUntil(
