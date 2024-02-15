@@ -29,8 +29,9 @@ dependencies:
   flutter_screenutil: ^5.9.0
   firebase_core: ^2.24.2
   firebase_auth: ^4.15.3
+  
+  #otp pin ui package
   pinput: ^3.0.1
-  async: ^2.11.0
 
 dev_dependencies:
   flutter_test:

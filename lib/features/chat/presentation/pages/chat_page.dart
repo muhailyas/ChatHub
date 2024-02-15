@@ -1,3 +1,4 @@
+import 'package:chathub/config/routes/routes.dart';
 import 'package:chathub/core/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,61 +12,66 @@ class ScreenChat extends StatelessWidget {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           flexibleSpace: SafeArea(
-            child: Row(
-              children: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(
-                    Icons.arrow_back,
+            child: InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, Routes.visitProfile);
+              },
+              child: Row(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: CustomColor.secondarySaffron,
+                    ),
+                  ),
+                  const CircleAvatar(
+                    backgroundImage: NetworkImage(
+                        "https://imgs.search.brave.com/9HZUq2wCtup2lbzmW230Bep7WzPEvBsBXTk9Q2cbYLc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTI4/MTk5ODUxOS9waG90/by9wcm9maWxlLXBv/cnRyYWl0LW9mLXdv/bWFuLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz1NdF9meTNH/SzFka2hyR3BfUGtu/VmpFR2VNTWpfcVNB/QWJIWWtYLWYtMy1r/PQ"),
+                  ),
+                  SizedBox(width: 10.w),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Mary john",
+                        style: TextStyle(
+                          color: CustomColor.whiteColor,
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Text(
+                        "Online",
+                        style: TextStyle(
+                          color: CustomColor.whiteColor,
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.w100,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Spacer(),
+                  const Icon(
+                    Icons.phone,
                     color: CustomColor.secondarySaffron,
                   ),
-                ),
-                const CircleAvatar(
-                  backgroundImage: NetworkImage(
-                      "https://imgs.search.brave.com/9HZUq2wCtup2lbzmW230Bep7WzPEvBsBXTk9Q2cbYLc/rs:fit:860:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTI4/MTk5ODUxOS9waG90/by9wcm9maWxlLXBv/cnRyYWl0LW9mLXdv/bWFuLmpwZz9zPTYx/Mng2MTImdz0wJms9/MjAmYz1NdF9meTNH/SzFka2hyR3BfUGtu/VmpFR2VNTWpfcVNB/QWJIWWtYLWYtMy1r/PQ"),
-                ),
-                SizedBox(width: 10.w),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Mary john",
-                      style: TextStyle(
-                        color: CustomColor.whiteColor,
-                        fontSize: 18.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    Text(
-                      "Online",
-                      style: TextStyle(
-                        color: CustomColor.whiteColor,
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w100,
-                      ),
-                    ),
-                  ],
-                ),
-                const Spacer(),
-                const Icon(
-                  Icons.phone,
-                  color: CustomColor.secondarySaffron,
-                ),
-                SizedBox(width: 13.w),
-                const Icon(
-                  Icons.videocam,
-                  color: CustomColor.secondarySaffron,
-                ),
-                SizedBox(width: 13.w),
-                const Icon(
-                  Icons.more_vert_rounded,
-                  color: CustomColor.secondarySaffron,
-                ),
-                SizedBox(width: 13.w),
-              ],
+                  SizedBox(width: 13.w),
+                  const Icon(
+                    Icons.videocam,
+                    color: CustomColor.secondarySaffron,
+                  ),
+                  SizedBox(width: 13.w),
+                  const Icon(
+                    Icons.more_vert_rounded,
+                    color: CustomColor.secondarySaffron,
+                  ),
+                  SizedBox(width: 13.w),
+                ],
+              ),
             ),
           ),
         ),

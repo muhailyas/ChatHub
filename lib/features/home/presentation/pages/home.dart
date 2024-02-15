@@ -35,6 +35,9 @@ class ScreenHome extends StatelessWidget {
                     ),
                     SizedBox(width: 10.sp),
                     InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, Routes.profile);
+                      },
                       onDoubleTap: () {
                         FirebaseAuth.instance.signOut();
                         Navigator.pushNamedAndRemoveUntil(
@@ -245,6 +248,14 @@ class ScreenHome extends StatelessWidget {
               ],
             ),
           ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: CustomColor.secondaryColor,
+        child: const Icon(
+          Icons.message,
+          color: CustomColor.secondarySaffron,
         ),
       ),
     );
