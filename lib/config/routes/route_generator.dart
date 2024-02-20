@@ -4,6 +4,7 @@ import 'package:chathub/features/auth/presentation/pages/onboard/onboard.dart';
 import 'package:chathub/features/auth/presentation/pages/otp/otp.dart';
 import 'package:chathub/features/auth/presentation/pages/terms_of_service/terms_of_service.dart';
 import 'package:chathub/features/chat/presentation/pages/chat_page.dart';
+import 'package:chathub/features/home/presentation/pages/contact_list.dart';
 import 'package:chathub/features/home/presentation/pages/home.dart';
 import 'package:chathub/features/profile/presentation/pages/user_profile/user_profile.dart';
 import 'package:chathub/features/profile/presentation/pages/visit_profile/visit_user_proflie.dart';
@@ -48,6 +49,10 @@ class RouteGenerator {
       case Routes.profile:
         return MaterialPageRoute(
           builder: (context) => const ScreenProfile(),
+        );
+      case Routes.selectContactList:
+        return MaterialPageRoute(
+          builder: (context) => const ScreenSelectContactList(),
         );
       default:
         return _errorScreen();

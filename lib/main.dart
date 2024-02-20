@@ -2,8 +2,9 @@ import 'package:chathub/config/routes/route_generator.dart';
 import 'package:chathub/config/theme/theme.dart';
 import 'package:chathub/core/responsive/responsive_width_hieght.dart';
 import 'package:chathub/features/auth/presentation/bloc/auth/auth_bloc.dart';
-import 'package:chathub/features/auth/presentation/pages/mobile_field/mobile_field.dart';
+import 'package:chathub/features/auth/presentation/bloc/bloc/timer_bloc.dart';
 import 'package:chathub/features/splash/presentation/bloc/splash/splash_bloc.dart';
+import 'package:chathub/features/splash/presentation/pages/splash_screen.dart';
 import 'package:chathub/injection_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -35,6 +36,9 @@ class ChatHub extends StatelessWidget {
           ),
           BlocProvider<SplashBloc>(
             create: (context) => DependencyInjection.sl(),
+          ),
+          BlocProvider<TimerBloc>(
+            create: (context) => TimerBloc(),
           )
         ],
         child: MaterialApp(
@@ -43,7 +47,7 @@ class ChatHub extends StatelessWidget {
           onGenerateRoute: (settings) =>
               RouteGenerator().onGenerateRoute(settings),
           theme: theme(),
-          home: const MobileFieldScreen(),
+          home: const ScreenSplash(),
         ),
       ),
     );

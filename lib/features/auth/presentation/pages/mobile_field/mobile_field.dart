@@ -42,7 +42,7 @@ class MobileFieldScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 15.h),
-              _buildFieldRow(context),
+              _buildFieldRow(context, authBloc),
               SizedBox(height: 15.h),
               BlocConsumer<AuthBloc, AuthState>(
                 listener: (context, state) {
@@ -80,7 +80,7 @@ class MobileFieldScreen extends StatelessWidget {
     );
   }
 
-  SizedBox _buildFieldRow(BuildContext context) {
+  SizedBox _buildFieldRow(BuildContext context, AuthBloc authBloc) {
     return SizedBox(
       height: Screen.height * 0.1,
       width: double.infinity,
@@ -88,7 +88,7 @@ class MobileFieldScreen extends StatelessWidget {
         children: [
           _buildCountryCode(context),
           SizedBox(width: Screen.width * 0.02),
-          _buildMobileField()
+          _buildMobileField(authBloc)
         ],
       ),
     );
@@ -96,14 +96,14 @@ class MobileFieldScreen extends StatelessWidget {
 
   Container _buildCountryCode(BuildContext context) {
     return Container(
-      height: Screen.height * 0.08,
+      height: Screen.height * 0.065,
       width: Screen.width * 0.12,
       decoration: BoxDecoration(
           color: CustomColor.secondaryColor,
           borderRadius: BorderRadius.circular(20.dg)),
       child: FittedBox(
         child: Padding(
-          padding: EdgeInsets.all(Responsive.isMobile(context) ? 13.dg : 5.dg),
+          padding: EdgeInsets.all(Responsive.isMobile(context) ? 7.dg : 5.dg),
           child: const Text(
             "+91",
             style: TextStyle(color: CustomColor.whiteColor),
@@ -113,15 +113,16 @@ class MobileFieldScreen extends StatelessWidget {
     );
   }
 
-  Flexible _buildMobileField() {
+  Flexible _buildMobileField(AuthBloc authBloc) {
     return Flexible(
       fit: FlexFit.tight,
       child: Container(
-        height: Screen.height * 0.08,
+        height: Screen.height * 0.065,
         decoration: BoxDecoration(
             color: CustomColor.secondaryColor,
             borderRadius: BorderRadius.circular(20.dg)),
-        child: const MobileTextFieldWidget(),
+        child: MobileTextFieldWidget(
+            textEditingController: authBloc.mobileController),
       ),
     );
   }
