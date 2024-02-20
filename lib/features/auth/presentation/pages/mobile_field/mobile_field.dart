@@ -1,10 +1,12 @@
 import 'package:chathub/config/routes/routes.dart';
 import 'package:chathub/core/colors/colors.dart';
-import 'package:chathub/core/constants/constants.dart';
 import 'package:chathub/core/constants/strings.dart';
+import 'package:chathub/core/responsive/responsive.dart';
+import 'package:chathub/core/responsive/responsive_width_hieght.dart';
 import 'package:chathub/features/auth/presentation/bloc/auth/auth_bloc.dart';
 import 'package:chathub/features/auth/presentation/widgets/circular_progress_bar/circular_progress.dart';
 import 'package:chathub/features/auth/presentation/widgets/elevated_button/elevated_button.dart';
+import 'package:chathub/features/auth/presentation/widgets/text_field/text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,7 +19,7 @@ class MobileFieldScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(18.0.h),
+          padding: EdgeInsets.all(Screen.width * 0.05),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -40,60 +42,7 @@ class MobileFieldScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 15.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    height: 40.h,
-                    width: 60.h,
-                    decoration: BoxDecoration(
-                        color: CustomColor.secondaryColor,
-                        borderRadius: Constants.borderRadius25H),
-                    child: Center(
-                        child: Text(
-                      AppStrings.countryCode,
-                      style: TextStyle(
-                          fontSize: 12.dg,
-                          color: CustomColor.whiteColor,
-                          fontWeight: FontWeight.w400),
-                    )),
-                  ),
-                  Container(
-                    width: 245.w,
-                    height: 40.h,
-                    decoration: BoxDecoration(
-                      color: CustomColor.secondaryColor,
-                      borderRadius: Constants.borderRadius25H,
-                    ),
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 16.0.h,
-                          vertical: 6.w,
-                        ),
-                        child: TextField(
-                          controller: authBloc.mobileController,
-                          keyboardType: TextInputType.phone,
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: AppStrings.hintTextMobile,
-                            hintStyle: TextStyle(
-                              fontSize: 12.dg,
-                              color: CustomColor.whiteColor,
-                            ),
-                          ),
-                          cursorColor: CustomColor.secondarySaffron,
-                          style: TextStyle(
-                            fontSize: 12.dg,
-                            color: CustomColor.whiteColor,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              _buildFieldRow(context, authBloc),
               SizedBox(height: 15.h),
               BlocConsumer<AuthBloc, AuthState>(
                 listener: (context, state) {
@@ -121,27 +70,85 @@ class MobileFieldScreen extends StatelessWidget {
                   }
                 },
                 builder: (context, state) {
-                  return ElevatedButtonWidget(
-                      onPressed: () {
-                        context.read<AuthBloc>().add(AuthEvent.validateMobile(
-                            mobile: authBloc.mobileController.text.trim()));
-                      },
-                      child: state is MobileVerificationLoading
-                          ? const CircularProgressIndicatorWidget()
-                          : Text(
-                              AppStrings.continueText,
-                              style: TextStyle(
-                                fontSize: 15.dm,
-                                fontWeight: FontWeight.w400,
-                                color: CustomColor.whiteColor,
-                              ),
-                            ));
+                  return _buildContinueButton(context, authBloc, state);
                 },
               )
             ],
           ),
         ),
       ),
+    );
+  }
+
+  SizedBox _buildFieldRow(BuildContext context, AuthBloc authBloc) {
+    return SizedBox(
+      height: Screen.height * 0.1,
+      width: double.infinity,
+      child: Row(
+        children: [
+          _buildCountryCode(context),
+          SizedBox(width: Screen.width * 0.02),
+          _buildMobileField(authBloc)
+        ],
+      ),
+    );
+  }
+
+  Container _buildCountryCode(BuildContext context) {
+    return Container(
+      height: Screen.height * 0.065,
+      width: Screen.width * 0.12,
+      decoration: BoxDecoration(
+          color: CustomColor.secondaryColor,
+          borderRadius: BorderRadius.circular(20.dg)),
+      child: FittedBox(
+        child: Padding(
+          padding: EdgeInsets.all(Responsive.isMobile(context) ? 7.dg : 5.dg),
+          child: const Text(
+            "+91",
+            style: TextStyle(color: CustomColor.whiteColor),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Flexible _buildMobileField(AuthBloc authBloc) {
+    return Flexible(
+      fit: FlexFit.tight,
+      child: Container(
+        height: Screen.height * 0.065,
+        decoration: BoxDecoration(
+            color: CustomColor.secondaryColor,
+            borderRadius: BorderRadius.circular(20.dg)),
+        child: MobileTextFieldWidget(
+            textEditingController: authBloc.mobileController),
+      ),
+    );
+  }
+
+  Widget _buildContinueButton(
+      BuildContext context, AuthBloc authBloc, AuthState state) {
+    return Align(
+      alignment: Alignment.center,
+      child: ElevatedButtonWidget(
+          height: Screen.height * 0.07,
+          width: Screen.width,
+          onPressed: () {
+            context.read<AuthBloc>().add(AuthEvent.validateMobile(
+                mobile: authBloc.mobileController.text.trim()));
+          },
+          child: state is MobileVerificationLoading
+              ? const CircularProgressIndicatorWidget()
+              : const FittedBox(
+                  child: Text(
+                    AppStrings.continueText,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      color: CustomColor.whiteColor,
+                    ),
+                  ),
+                )),
     );
   }
 }

@@ -1,6 +1,8 @@
 import 'package:chathub/config/routes/route_generator.dart';
 import 'package:chathub/config/theme/theme.dart';
+import 'package:chathub/core/responsive/responsive_width_hieght.dart';
 import 'package:chathub/features/auth/presentation/bloc/auth/auth_bloc.dart';
+import 'package:chathub/features/auth/presentation/bloc/bloc/timer_bloc.dart';
 import 'package:chathub/features/splash/presentation/bloc/splash/splash_bloc.dart';
 import 'package:chathub/features/splash/presentation/pages/splash_screen.dart';
 import 'package:chathub/injection_container.dart';
@@ -25,6 +27,7 @@ class ChatHub extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Screen.init(context);
     return ScreenUtilInit(
       child: MultiBlocProvider(
         providers: [
@@ -33,6 +36,9 @@ class ChatHub extends StatelessWidget {
           ),
           BlocProvider<SplashBloc>(
             create: (context) => DependencyInjection.sl(),
+          ),
+          BlocProvider<TimerBloc>(
+            create: (context) => TimerBloc(),
           )
         ],
         child: MaterialApp(

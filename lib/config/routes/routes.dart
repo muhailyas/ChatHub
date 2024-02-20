@@ -8,4 +8,5 @@ class Routes {
   static const chatPage = 'chatPage/';
   static const visitProfile = 'visitProfile/';
   static const profile = 'profile/';
+  static const selectContactList = 'selectContactList/';
 }
