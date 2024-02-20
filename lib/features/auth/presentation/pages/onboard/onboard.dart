@@ -14,8 +14,12 @@ class ScreenOnboard extends StatelessWidget {
     return Scaffold(
         body: Column(
       children: [
+        const SizedBox(width: double.infinity),
         const Spacer(),
-        Image.asset("assets/Chat hub logo.png"),
+        Image.asset(
+          "assets/Chat hub logo.png",
+          scale: 2,
+        ),
         const Spacer(),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
@@ -23,7 +27,9 @@ class ScreenOnboard extends StatelessWidget {
               child: RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(children: [
-                    const TextSpan(text: AppStrings.onboardText),
+                    const TextSpan(
+                        text: AppStrings.onboardText,
+                        style: TextStyle(color: CustomColor.whiteColor)),
                     TextSpan(
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
@@ -39,9 +45,11 @@ class ScreenOnboard extends StatelessWidget {
           onPressed: () {
             Navigator.pushNamed(context, Routes.mobileField);
           },
-          child: Text(
-            AppStrings.onboardContinue,
-            style: TextStyle(fontSize: 17.dm, color: CustomColor.whiteColor),
+          child: const FittedBox(
+            child: Text(
+              AppStrings.onboardContinue,
+              style: TextStyle(color: CustomColor.whiteColor),
+            ),
           ),
         ),
         SizedBox(height: 20.h),
